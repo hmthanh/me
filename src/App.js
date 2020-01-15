@@ -1,24 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import MobileNav from "./components/MobileNav";
+import Header from "./components/Header";
+import About from "./components/About";
+import News from "./components/News";
+import Experience from "./components/Experience";
+import Accomplishments from "./components/Accomplishments";
+import Miscellaneous from "./components/Miscellaneous";
+import Footer from "./components/Footer";
+import Education from "./components/Education";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <MobileNav></MobileNav>
+      <div className="wrapper">
+        <Header></Header>
+        <div className="content">
+          <div className="container">
+            <About></About>
+            <News></News>
+            <Education></Education>
+            <Experience></Experience>
+            <Accomplishments></Accomplishments>
+            <Miscellaneous></Miscellaneous>
+          </div>
+        </div>
+        <Footer></Footer>
+      </div>
+      <a className="btn-scroll-top" href="index.html#">
+        <i className="icon icon-arrow-up"></i>
+      </a>
     </div>
   );
 }
