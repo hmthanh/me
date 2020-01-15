@@ -86,7 +86,8 @@ svg.icon>path {
 }
 
 svg.icon {
-    height: 22px;
+    max-width: 20px;
+    height: 20px;
     display: inline-block;
     font-size: 1.33333333em;
     line-height: .9em;
