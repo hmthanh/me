@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-// import {
-//     Link
-//   } from "react-router-dom";
+import {Facebook, Twitter, Linkedin, Github, Medium, Stackoverflow, Phone, Envelope, Skype} from './Icon'
 
 export default class About extends Component {
     render() {
@@ -35,13 +33,13 @@ export default class About extends Component {
                                         <h2 className="profile-university"><strong>Interested field</strong> : Handwriting Recognition on Touch Screen, Object Detection and relate field</h2>
                                         <div className="ul-info">
                                             <a className="contact-item" href="tel:+84913472506">
-                                                <i className="fa fa-lg fa-phone"></i> +84913472506
+                                                <Phone />+84913472506
                                             </a>
                                             <a className="contact-item" href="mailto:hmthanhgm@gmail.com">
-                                                <i className="fa fa-lg fa-envelope"></i> hmthanhgm@gmail.com
+                                                <Envelope /> hmthanhgm@gmail.com
                                             </a>
                                             <a className="contact-item" href="skype:+hmthanhgm">
-                                                <i className="fa fa-lg fa-skype"></i> hmthanhgm
+                                                <Skype/> hmthanhgm
                                             </a>
                                         </div>
                                     </div>
@@ -52,32 +50,32 @@ export default class About extends Component {
                             <ul className="ul-info">
                                 <li className="li-info">
                                     <a className="icon-info" rel="noopener noreferrer" target="_blank" href="https://www.facebook.com/hmthanhgm">
-                                        <i className="fa fa-lg fa-facebook"></i>
+                                        <Facebook/>
                                     </a>
                                 </li>
                                 <li className="li-info">
                                     <a className="icon-info" rel="noopener noreferrer" target="_blank" href="https://twitter.com/hmthanhgm">
-                                        <i className="fa fa-lg fa-twitter"></i>
+                                        <Twitter/>
                                     </a>
                                 </li>
                                 <li className="li-info">
                                     <a className="icon-info" rel="noopener noreferrer" target="_blank" href="https://www.linkedin.com/in/hmthanh/">
-                                        <i className="fa fa-lg fa-linkedin" aria-hidden="true"></i>
+                                        <Linkedin/>
                                     </a>
                                 </li>
                                 <li className="li-info">
                                     <a className="icon-info" rel="noopener noreferrer" target="_blank" href="https://github.com/hmthanh">
-                                        <i className="fa fa-lg fa-github" aria-hidden="true"></i>
+                                        <Github/>
                                     </a>
                                 </li>
                                 <li className="li-info">
                                     <a className="icon-info" rel="noopener noreferrer" target="_blank" href="https://medium.com/@hmthanh">
-                                        <i className="fa fa-lg fa-medium" aria-hidden="true"></i>
+                                        <Medium/>
                                     </a>
                                 </li>
                                 <li className="li-info">
                                     <a className="icon-info" rel="noopener noreferrer" target="_blank" href="https://stackoverflow.com/story/hmthanh">
-                                        <i className="fa fa-lg fa-stack-overflow" aria-hidden="true"></i>
+                                        <Stackoverflow/>
                                     </a>
                                 </li>
                             </ul>

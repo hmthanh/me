@@ -8,6 +8,7 @@ import Accomplishments from "./components/Accomplishments";
 import Miscellaneous from "./components/Miscellaneous";
 import Footer from "./components/Footer";
 import Education from "./components/Education";
+import { ArrowAltCircleUp } from './components/Icon'
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
         <Footer></Footer>
       </div>
       <a className="btn-scroll-top" href="index.html#">
-        <i className="icon icon-arrow-up"></i>
+        <ArrowAltCircleUp />
       </a>
     </div>
   );
