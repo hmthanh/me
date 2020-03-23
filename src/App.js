@@ -1,38 +1,30 @@
-import React from "react";
+import React, {Component} from 'react'
+import {BrowserRouter} from 'react-router-dom'
+import Main from './pages/MainPage'
+import {Provider} from 'react-redux'
+import {ConfigureStore} from './redux/configureStore'
 import MobileNav from "./components/MobileNav";
-import Header from "./components/Header";
-import About from "./components/About";
-import News from "./components/News";
-import Experience from "./components/Experience";
-import Accomplishments from "./components/Accomplishments";
-import Miscellaneous from "./components/Miscellaneous";
-import Footer from "./components/Footer";
-import Education from "./components/Education";
-import { ArrowAltCircleUp } from './components/Icon'
+import {ArrowAltCircleUp} from "./components/Icon/Icon";
+import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <MobileNav></MobileNav>
-      <div className="wrapper">
-        <Header></Header>
-        <div className="content">
-          <div className="container">
-            <About></About>
-            <News></News>
-            <Education></Education>
-            <Experience></Experience>
-            <Accomplishments></Accomplishments>
-            <Miscellaneous></Miscellaneous>
-          </div>
-        </div>
-        <Footer></Footer>
-      </div>
-      <a className="btn-scroll-top" href="index.html#">
-        <ArrowAltCircleUp />
-      </a>
-    </div>
-  );
+const store = ConfigureStore();
+
+class App extends Component {
+    render() {
+        return (
+            <>
+                <MobileNav></MobileNav>
+                <Provider store={store}>
+                    <BrowserRouter>
+                        <Main/>
+                    </BrowserRouter>
+                </Provider>
+                <a className="btn-scroll-top" href="index.html#">
+                    <ArrowAltCircleUp/>
+                </a>
+            </>
+        )
+    }
 }
 
 export default App;
