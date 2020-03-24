@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import WorldMap from './WorldMap/WorldMap';
+// import WorldMap from './WorldMap/WorldMap';
 
 export default class Miscellaneous extends Component {
     render() {
@@ -53,7 +53,7 @@ export default class Miscellaneous extends Component {
                             <br/>
                         </p>
 
-                        <WorldMap></WorldMap>
+                        {/*<WorldMap></WorldMap>*/}
                     </div>
                 </div>
             </section>
