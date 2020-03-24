@@ -35,13 +35,11 @@ export default class Experience extends Component {
                                     <span className="arrow"></span>
                                     <div className="date">Aug. 2019 - Now</div>
                                     <img src="img/rakumo.png" alt="rakumo Co., Ltd" style={logoStyle}/>
-                                    <h3>.</h3>
                                     <h3>rakumo Co., Ltd</h3>
                                     <h4>Python Developer</h4>
                                     <p>Python, Django, Flask, Git, Selenium</p>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>

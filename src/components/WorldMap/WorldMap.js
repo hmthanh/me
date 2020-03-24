@@ -90,7 +90,6 @@ class WorldMap extends Component {
         let mapSeaColor = am4core.color("rgb(170 , 218, 255)");
         let btnStokeColor = am4core.color("#fff");
         let btnBackgroundColor = am4core.color("#3b3b3b");
-        let colorRed = am4core.color("#3f3");
         btnBackgroundColor.opacity = 0.6;
 
         // create amchart
