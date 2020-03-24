@@ -6,16 +6,6 @@ import am4geodata_worldHigh from "@amcharts/amcharts4-geodata/worldHigh";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import am4themes_dark from "@amcharts/amcharts4/themes/dark";
 
-// data
-const continents = {
-    "AF": 0,
-    "AN": 1,
-    "AS": 2,
-    "EU": 3,
-    "NA": 4,
-    "OC": 5,
-    "SA": 6
-};
 const countries = {
     "AU": {
         "country": "Australia",
@@ -34,12 +24,6 @@ const countries = {
         "continent_code": "AS",
         "continent": "Asia",
         "maps": ["chinaLow", "chinaHigh"]
-    },
-    "DE": {
-        "country": "Germany",
-        "continent_code": "EU",
-        "continent": "Europe",
-        "maps": ["germanyLow", "germanyHigh"]
     },
     "FR": {
         "country": "France",
@@ -102,8 +86,33 @@ am4core.useTheme(am4themes_dark);
 
 class WorldMap extends Component {
     componentDidMount() {
-        var _worldMap = am4core.create("wordMap", am4maps.MapChart);
+        // define color
+        let mapSeaColor = am4core.color("rgb(170 , 218, 255)");
+        let btnStokeColor = am4core.color("#fff");
+        let btnBackgroundColor = am4core.color("#3b3b3b");
+        let colorRed = am4core.color("#3f3");
+        btnBackgroundColor.opacity = 0.6;
+
+        // create amchart
+        let _worldMap = am4core.create("wordMap", am4maps.MapChart);
         _worldMap.projection = new am4maps.projections.Mercator();
+        _worldMap.backgroundColor = "#AADAFF";
+        _worldMap.fill = mapSeaColor;
+        _worldMap.homeZoomLevel = 1;
+        let colorSet = [
+            am4core.color("#1BA68D"),
+            am4core.color("#581845"),
+            am4core.color("#E77624"),
+            am4core.color("#3498DB"),
+            am4core.color("#F1C40F"),
+            am4core.color("#232555"),
+            am4core.color("#E74C3C"),
+            am4core.color("#367B25"),
+            am4core.color("#000"),
+            am4core.color("#A569BD"),
+            am4core.color("#C0392B"),
+            am4core.color("#DF3520")
+        ];
 
         // world settings
         let worldSeries = _worldMap.series.push(new am4maps.MapPolygonSeries());
@@ -115,8 +124,7 @@ class WorldMap extends Component {
         worldPolygon.tooltipText = "{name}";
         worldPolygon.nonScalingStroke = true;
         worldPolygon.strokeOpacity = 0.5;
-        worldPolygon.fill = am4core.color("#AADAFF");
-        worldPolygon.fill = am4core.color("#eee");
+        worldPolygon.fill = am4core.color("rgb(255, 247, 238);");
         worldPolygon.propertyFields.fill = "color";
 
         let hsWorld = worldPolygon.states.create("hover");
@@ -154,28 +162,46 @@ class WorldMap extends Component {
 
         // settings up data
         let data = [];
+        let icolor = 0;
         for (let id in countries) {
             if (countries.hasOwnProperty(id)) {
                 let country = countries[id];
                 if (country.maps.length) {
                     data.push({
                         id: id,
-                        color: _worldMap.colors.getIndex(continents[country.continent_code]),
+                        color: colorSet[icolor],
                         map: country.maps[0]
                     });
                 }
+                icolor = icolor + 1;
             }
         }
         worldSeries.data = data;
 
         // add zoom control
-        _worldMap.zoomControl = new am4maps.ZoomControl();
+        let btnZoomControl = new am4maps.ZoomControl();
+        btnZoomControl.marginRight = 10;
+        btnZoomControl.opacity = 0.6;
+        btnZoomControl.stroke = btnStokeColor;
+        _worldMap.zoomControl = btnZoomControl;
 
         // Add back button
-        let btnBack = _worldMap.createChild(am4core.ZoomOutButton);
+        let btnBack = _worldMap.createChild(am4core.Button);
+        let btnBackIcon = new am4core.Sprite();
+        btnBackIcon.path = "M-6.5,0.5 L7.5,0.5";
+        btnBackIcon.stroke = btnStokeColor;
+        btnBack.icon = btnBackIcon;
+
         btnBack.align = "right";
-        btnBack.icon = new am4core.Circle();
-        btnBack.icon.path = "M 336.5 160 C 322 70.7 287.8 8 248 8 s -74 62.7 -88.5 152 h 177 Z M 152 256 c 0 22.2 1.2 43.5 3.3 64 h 185.3 c 2.1 -20.5 3.3 -41.8 3.3 -64 s -1.2 -43.5 -3.3 -64 H 155.3 c -2.1 20.5 -3.3 41.8 -3.3 64 Z m 324.7 -96 c -28.6 -67.9 -86.5 -120.4 -158 -141.6 c 24.4 33.8 41.2 84.7 50 141.6 h 108 Z M 177.2 18.4 C 105.8 39.6 47.8 92.1 19.3 160 h 108 c 8.7 -56.9 25.5 -107.8 49.9 -141.6 Z M 487.4 192 H 372.7 c 2.1 21 3.3 42.5 3.3 64 s -1.2 43 -3.3 64 h 114.6 c 5.5 -20.5 8.6 -41.8 8.6 -64 s -3.1 -43.5 -8.5 -64 Z M 120 256 c 0 -21.5 1.2 -43 3.3 -64 H 8.6 C 3.2 212.5 0 233.8 0 256 s 3.2 43.5 8.6 64 h 114.6 c -2 -21 -3.2 -42.5 -3.2 -64 Z m 39.5 96 c 14.5 89.3 48.7 152 88.5 152 s 74 -62.7 88.5 -152 h -177 Z m 159.3 141.6 c 71.4 -21.2 129.4 -73.7 158 -141.6 h -108 c -8.8 56.9 -25.6 107.8 -50 141.6 Z M 19.3 352 c 28.6 67.9 86.5 120.4 158 141.6 c -24.4 -33.8 -41.2 -84.7 -50 -141.6 h -108 Z";
+        btnBack.valign = "top";
+        btnBack.marginRight = 14;
+        btnBack.marginTop = 50;
+        btnBack.padding(5, 0, 5, 0);
+        btnBack.width = 31;
+        btnBack.height = 31;
+        btnBack._background.fill = btnBackgroundColor;
+        btnBack._background.opacity = 0.6;
+        btnBack.opacity = 0.6;
         btnBack.hide();
         btnBack.events.on("hit", function (ev) {
             worldSeries.show();
@@ -186,35 +212,23 @@ class WorldMap extends Component {
 
         // Add home button
         let btnHome = _worldMap.chartContainer.createChild(am4core.Button);
+        let btnHomeIcon = new am4core.Sprite();
+        btnHomeIcon.path = "M-6.5,0.5 L0.5,-6.5 L7.5,0.5 L6.5,0.5 L6.5,6.5 L2.5,6.5 L2.5,2.5 L-1.5,2.5 L-1.5,6.5 L-5.5,6.5 L-5.5,0.5 Z";
+        btnHomeIcon.fill = btnStokeColor;
+        btnHomeIcon.padding(4, 3, 4, 3);
+        btnHome.icon = btnHomeIcon;
+
         btnHome.align = "right";
-        btnHome.margin(5, 5, 5, 5);
-        btnHome.setColor = am4core.color("#fff");
-        btnHome.icon = new am4core.Sprite();
-        btnHome.icon.padding(5, 5, 5, 5);
-        btnHome.fill = am4core.color("#000");
-        btnHome.stroke = am4core.color("#fff");
-        btnHome.icon.path = "M-6.5,0.5 L0.5,-6.5 L7.5,0.5 L6.5,0.5 L6.5,6.5 L2.5,6.5 L2.5,2.5 L-1.5,2.5 L-1.5,6.5 L-5.5,6.5 L-5.5,0.5 Z";
-        btnHome.icon.fill = am4core.color("rgb(73, 73, 73)");
-        btnHome.icon.stroke = am4core.color("rgb(73, 73, 73)");
+        btnHome.marginRight = 14;
+        btnHome.padding(5, 5, 5, 5);
+        btnHome._background.fill = btnBackgroundColor;
+        btnHome.opacity = 0.6;
         btnHome.events.on("hit", function () {
             _worldMap.goHome();
         });
 
-
-        // btnHome.backgroundColor = "#FFFFFF";
-        // btnHome.cornerStrokeColor = "#000000";
-
-
-        //
-        // var polygonTemplate = polygonSeries.mapPolygons.template;
-        // polygonTemplate.tooltipText = "{name}";
-        // polygonTemplate.fill = am4core.color("#FFF7EE");
-
-        // polygonTemplate.fill = am4core.se("#FFF7EE");
-
         this.worldMap = _worldMap;
     }
-
 
     componentWillUnmount() {
         if (this.worldMap) {
@@ -224,7 +238,7 @@ class WorldMap extends Component {
 
     render() {
         let mapStyle = {
-            width: "850px",
+            width: "840px",
             height: "540px"
         };
         return (
